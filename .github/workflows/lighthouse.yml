@@ -19,10 +19,19 @@ jobs:
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
-  
+    
+    - name: Netlify Actions
+      uses: nwtgck/actions-netlify@v1.0.12
+      with:
+        publish-dir: './'
+      env:
+        NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+        NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+
+    
     - name: Lighthouse CI Action
       uses: treosh/lighthouse-ci-action@v2
       with:
-          urls: |
-            https://aatishb.com/covidtrends
-          uploadArtifacts: true # save results as an action artifacts
+        urls: |
+          https://aatishb.com/covidtrends
+        uploadArtifacts: true # save results as an action artifacts
